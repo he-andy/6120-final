@@ -1,0 +1,34 @@
+extract = 'total_dyn_inst: (\d+)'
+benchmarks = 'benchmarks/*/*.bril'
+
+[runs.baseline]
+pipeline = [
+    "bril2json",
+    "brili -p {args}",
+]
+
+[runs.tdce_only]
+pipeline = [
+    "bril2json",
+    "target/release/bril-opts --dce",
+    "bril2json",
+    "brili -p {args}",
+]
+
+[runs.lvn_tdce]
+pipeline = [
+    "bril2json",
+    "target/release/bril-opts --dce --lvn",
+    "bril2json",
+    "brili -p {args}",
+]
+
+[runs.ssa]
+pipeline = [
+    "bril2json",
+    "target/release/bril-opts --ssa",
+    "bril2json",
+    "brili -p {args}",
+]
+
+
